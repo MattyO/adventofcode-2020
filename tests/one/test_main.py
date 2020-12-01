@@ -12,7 +12,7 @@ class OneTest(unittest.TestCase):
 
         result = one.main.two_numbers(possible_numbers)
 
-        self.assertEqual(result, [1721, 299]) 
+        self.assertEqual(result, (1721, 299)) 
 
     def test_two_numbers_two(self):
         possible_numbers = None
@@ -20,7 +20,7 @@ class OneTest(unittest.TestCase):
             possible_numbers = [ int(line) for line in f.readlines() ]
 
         result = one.main.two_numbers(possible_numbers)
-        self.assertEqual(result, [1301, 719]) 
+        self.assertEqual(result, (1301, 719)) 
 
     def test_three_numbers(self):
         possible_numbers = [1721,
@@ -32,7 +32,7 @@ class OneTest(unittest.TestCase):
 
         result = one.main.three_numbers(possible_numbers)
 
-        self.assertEqual(result, [979, 366, 675]) 
+        self.assertEqual(result, (979, 366, 675)) 
 
     def test_three_numbers_two(self):
         possible_numbers = None
@@ -41,5 +41,5 @@ class OneTest(unittest.TestCase):
 
         result = one.main.three_numbers(possible_numbers)
 
-        self.assertEqual(result, [889, 1079, 52]) 
+        self.assertEqual(result, (889, 1079, 52)) 
 
