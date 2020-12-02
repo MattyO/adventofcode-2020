@@ -40,4 +40,4 @@ class IsValidTest(unittest.TestCase):
             items = f.readlines()
 
         num_valid = len(list(filter(lambda i: two.main.is_valid_two(i), items)))
-        self.assertEqual(num_valid, 517) 
+        self.assertEqual(num_valid, 284) 
