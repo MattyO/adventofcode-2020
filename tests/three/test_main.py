@@ -3,10 +3,10 @@ import three.main
 
 class MapTest(unittest.TestCase):
     def setUp(self):
-        self.example_map = three.main.Map("data_example.txt")
+        self.example_map = three.main.Map("three/data_example.txt")
 
     def test_map(self):
-        self.assertIsInstance(three.main.Map("data_example.txt"), three.main.Map)
+        self.assertIsInstance(three.main.Map("three/data_example.txt"), three.main.Map)
 
     def test_map_trees(self):
         m = three.main.Map("three/data_example.txt")
@@ -72,7 +72,6 @@ class MapTest(unittest.TestCase):
 
     def test_trees_two_puzzel(self):
         m = three.main.Map("three/data_one.txt")
-        m.trees
         self.assertEqual(three.main.trees(m, (1, 1)),  81) 
         self.assertEqual(three.main.trees(m, (1, 3)),  292) 
         self.assertEqual(three.main.trees(m, (1, 5)),  89) 
