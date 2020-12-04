@@ -114,3 +114,15 @@ class PassportTest(unittest.TestCase):
 
         self.assertEqual(len(list(filter(lambda p: not p.is_valid(), passports))), 4)
 
+    def test_get_validations_for(self):
+        lines = ['ecl:gry pid:860033327 eyr:2020 hcl:#fffffd',
+                 'byr:1937 iyr:2017 cid:147 hgt:183cm']
+
+        p = four.main.Passport(lines)
+        validations = list(p.validations_for('byr'))
+        k, v = next(p.validations_for('byr'))
+
+        self.assertEqual(len(validations), 2)
+        self.assertTrue(callable(v))
+
+
