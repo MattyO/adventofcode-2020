@@ -10,7 +10,7 @@ class SeatIdTest(unittest.TestCase):
         self.assertEqual(five.main.seat_id("BFFFBBFRRR"), (70, 7, 567 ))
 
     def test_seat_id_3(self):
-        self.assertEqual(five.main.seat_id("FFFBBBFRRR"), (14, 7, 199 ))
+        self.assertEqual(five.main.seat_id("FFFBBBFRRR"), (14, 7, 119 ))
 
     def test_seat_id_4(self):
         self.assertEqual(five.main.seat_id("BBFFBBFRLL"), (102, 4, 820))
@@ -19,7 +19,7 @@ class SeatIdTest(unittest.TestCase):
         with open("five/input.txt") as f:
             lines = f.readlines()
 
-        self.assertEqual(max(map(lambda l: five.main.seat_id(l.strip())[-1], lines)), 1)
+        self.assertEqual(max(map(lambda l: five.main.seat_id(l.strip())[-1], lines)), 926)
 
     def test_seat_id_missing_seats(self):
         with open("five/input.txt") as f:
