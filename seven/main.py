@@ -42,5 +42,4 @@ def get_parents(nodes, name):
 
 def count_children(nodes, name):
     node = get_node(nodes, name)
-    #print(node)
     return sum(int(c[1]) for c in node[1]) + sum(int(c[1]) * count_children(nodes, c[0]) for c in node[1])

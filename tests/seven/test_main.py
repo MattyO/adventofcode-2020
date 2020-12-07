@@ -7,7 +7,6 @@ class BagTest(unittest.TestCase):
 
     def test_parse(self):
         bag_nodes = seven.main.parse('seven/example.txt')
-        #pprint(bag_nodes)
         self.assertEqual(len(bag_nodes), 9)
 
     def test_parse_parent(self):
