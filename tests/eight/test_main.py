@@ -41,7 +41,7 @@ class MainTest(unittest.TestCase):
         inst = eight.main.parse('eight/puzzle.txt')
         c = eight.main.Comp()
         c.run(inst)
-        self.assertEqual(c.accumulator, 5)
+        self.assertEqual(c.accumulator, 1584)
 
     def test_fix(self):
         inst = eight.main.parse('eight/example.txt')
@@ -53,6 +53,6 @@ class MainTest(unittest.TestCase):
         inst = eight.main.parse('eight/puzzle.txt')
         c = eight.main.fix(inst)
 
-        self.assertEqual(c.accumulator, 8)
+        self.assertEqual(c.accumulator, 920)
 
 

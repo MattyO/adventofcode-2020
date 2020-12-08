@@ -1,23 +1,15 @@
 import collections
 import re
+import lib.parser
 
 Field = collections.namedtuple('Field', ['name', 'value'])
 def read_passports(filename):
     passports = []
-    with open(filename) as f:
-        lines = f.readlines()
-
-    passport_lines = []
-    for line in lines:
-        if line.strip() == "":
-            passports.append(Passport(passport_lines))
-            passport_lines.clear()
-        else:
-            passport_lines.append(line)
-    if len(passport_lines) > 0:
-        passports.append(Passport(passport_lines))
+    for lines in lib.parser.file_grouped_by_blanke_lines(filename):
+        passports.append(Passport(lines))
 
     return passports
+
 def height_validation(f):
     result = re.search("(?P<num>[0-9]+)(?P<units>in|cm)", f)
 
