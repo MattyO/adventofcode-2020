@@ -1,4 +1,4 @@
-import collections 
+import collections
 import lib.matcher
 from pprint import pprint
 import copy
