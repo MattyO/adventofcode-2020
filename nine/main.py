@@ -10,8 +10,10 @@ def is_valid_window(item_list, window_size):
     return None
 
 def contiguous_set(item_list, num):
+
     for i, item in enumerate(item_list):
         for counter in range(i, len(item_list)):
+
             list_to_sum = item_list[i:counter]
             the_sum = sum(item_list[i:counter])
 
