@@ -1,6 +1,6 @@
 from lib.computer import InstructionSet, instruction
 
-class InstructionSet(lib.computer.InstructionSet):
+class FerryInstructions(lib.computer.InstructionSet):
 
     @instruction('N')
     def north(i, world):
@@ -32,15 +32,7 @@ def ferry_parser(line):
     pass
 
 FerryComputer = lib.computer.computer(
-    instructions = [
-        north,
-        south,
-        east,
-        west,
-        left,
-        right,
-        forward
-    ],
+    instruction_set = FerryInstructions,
     world = {
         'direction': 'N', 
         'possition': (0,0),
