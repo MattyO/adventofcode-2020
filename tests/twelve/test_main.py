@@ -181,5 +181,5 @@ class Findlocation2Test(unittest.TestCase):
         self.assertEqual(twelve.main.find_location2('twelve/example.txt'), (214, -72))
 
     def test_find_puzzle(self):
-        self.assertEqual(twelve.main.find_location2('twelve/puzzle.txt'), (17, -8))
+        self.assertEqual(twelve.main.find_location2('twelve/puzzle.txt'), (-7074, 6266))
 
