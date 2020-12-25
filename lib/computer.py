@@ -32,7 +32,7 @@ class Instruction():
     def __repr__(self):
         return f"{self.operation} {self.argument}"
 
-class InstructionSet():
+class InstructionSet(object):
     world = {}
 
     def get_instruction(self, instruction_operation):

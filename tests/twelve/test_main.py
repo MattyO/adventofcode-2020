@@ -91,6 +91,70 @@ class FerryInstructionsTest(unittest.TestCase):
             "south"
         )
 
+class FerryInstructions2Test(unittest.TestCase):
+
+    def test_test_right(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        right_instruction = Instruction('R', 90)
+        expected_world = twelve.main.FerryInstructions2().right(right_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (4,-10)} ) 
+
+    def test_right_180(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        right_instruction = Instruction('R', 180)
+        expected_world = twelve.main.FerryInstructions2().right(right_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (-10, -4)} ) 
+
+    def test_right_270(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        right_instruction = Instruction('R', 270)
+        expected_world = twelve.main.FerryInstructions2().right(right_instruction , starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (-4,10)} ) 
+
+    def test_right_360(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        right_instruction = Instruction('R', 360)
+        expected_world = twelve.main.FerryInstructions2().right(right_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (10,4)} ) 
+
+    def test_left(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        left_instruction = Instruction('L', 90)
+        expected_world = twelve.main.FerryInstructions2().left(left_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (-4,10)} ) 
+
+    def test_left_180(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        left_instruction = Instruction('L', 180)
+        expected_world = twelve.main.FerryInstructions2().left(left_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (-10,-4)} ) 
+
+    def test_left_270(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        left_instruction = Instruction('L', 270)
+        expected_world = twelve.main.FerryInstructions2().left(left_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (4,-10)} ) 
+
+    def test_left_360(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        left_instruction = Instruction('L', 360)
+        expected_world = twelve.main.FerryInstructions2().left(left_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (0,0), 'position': (10,4)} ) 
+
+    def test_forward(self):
+        starting_world = {'ship_position': (0,0), 'position': (10,4)}
+        forward_instruction = Instruction('F', 3)
+        expected_world = twelve.main.FerryInstructions2().forward(forward_instruction, starting_world)
+
+        self.assertEqual(expected_world, {'ship_position': (30,12), 'position': (10,4)} ) 
 
 class FindLocationTest(unittest.TestCase):
 
@@ -110,4 +174,12 @@ class FerryParserTest(unittest.TestCase):
 
     def test_ferry_parser_example_returns_instruction_arguments_are_ints(self):
         self.assertIsInstance(twelve.main.ferry_parser('twelve/example.txt')[0].argument, int)
+
+
+class Findlocation2Test(unittest.TestCase):
+    def test_find_location(self):
+        self.assertEqual(twelve.main.find_location2('twelve/example.txt'), (214, -72))
+
+    def test_find_puzzle(self):
+        self.assertEqual(twelve.main.find_location2('twelve/puzzle.txt'), (17, -8))
 
