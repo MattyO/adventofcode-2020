@@ -24,10 +24,9 @@ def match(pattern, string):
         new_regex = match_types.get(group_type, (group_type,))[0]
         regex_pattern = regex_pattern.replace(group, f'(?P<{group_name}>{new_regex})', 1)
 
-
     result = re.search(regex_pattern, string)
     if result is None:
-        return Struct(**{ 'is_match': False })
+        return Struct(**{ 'is_match': False, 'pattern': regex_pattern})
 
     result_hash =  { name: converter(result.group(name)) for name, (p, converter) in group_info  }
     result_hash['is_match'] = True
