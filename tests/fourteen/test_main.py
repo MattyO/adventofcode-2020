@@ -1,4 +1,5 @@
 import unittest
+import unittest.mock
 import fourteen.main
 from lib.computer import Instruction
 
@@ -60,6 +61,15 @@ class ParseTest(unittest.TestCase):
 
 
 class DockingInstructionSetTest(unittest.TestCase):
+
+    def test_address_sum(self):
+        dc_mock = unittest.mock.Mock(world={
+            'memory': {8: 20, 23: 10},
+            'mask': None,
+            })
+
+        self.assertEqual(fourteen.main.address_sum(dc_mock), 30)
+
     def test_mask(self):
         starting_world = {'mask': None}
         mask_instruction = Instruction('mask', "XXX01X1")
@@ -81,26 +91,17 @@ class DockingInstructionSetTest(unittest.TestCase):
 
 class PartOneComputerTest(unittest.TestCase):
 
-    def test_address_sum(self):
-        dc = fourteen.main.PartOneComputer(
-            world={
-                'memory': {8: 20, 23: 10},
-                'mask': None,
-            }
-        )
-
-        self.assertEqual(dc.address_sum(), 30)
-
-
     def test_address_sum_example(self):
-        dc = fourteen.main.PartOneComputer()
+        print('test exmaple')
         instructions = fourteen.main.parse("fourteen/example.txt")
+        dc = fourteen.main.PartOneComputer()
         dc.run(instructions)
-        self.assertEqual(dc.address_sum(), 165) 
+        self.assertEqual(fourteen.main.address_sum(dc), 165) 
 
     def test_address_sum_puzzle(self):
+        print('test puzzle')
         dc = fourteen.main.PartOneComputer()
         instructions = fourteen.main.parse("fourteen/puzzle.txt")
         dc.run(instructions)
-        self.assertEqual(dc.address_sum(), 11884151942312)
+        self.assertEqual(fourteen.main.address_sum(dc), 11884151942312)
 

@@ -53,14 +53,17 @@ class DockingInstructionSet(InstructionSet):
         world['mask'] = instruction.argument
         return world
 
-class PartOneComputer(Computer):
-    instruction_set = DockingInstructionSet()
+PartOneComputer = Computer(
+    instruction_set = DockingInstructionSet(),
+    world = {
+        'memory':{},
+        'mask': None,
+    }
+)
 
-    def __init__(self, *args, **kwargs):
-        super(PartOneComputer, self).__init__(*args, **kwargs)
 
-    def address_sum(self):
-        return sum(v for k, v in self.world['memory'].items())
+def address_sum(comp):
+    return sum(v for k, v in comp.world['memory'].items())
 
 
 

@@ -6,20 +6,16 @@ class Computer():
     def __init__(self, instruction_set=None, world=None):
         self.world = {}
 
-        if self.instruction_set is not None: 
-            self.world = self.instruction_set.world
-            self.instruction_set = self.instruction_set
-
         if instruction_set is not None:
             self.instruction_set = instruction_set
-            print('setting world to')
-            print(instruction_set.world)
-            self.world = instruction_set.world
+            self.world = copy.deepcopy(instruction_set.world)
 
         if world is not None:
             self.world.update(world)
 
     def run(self, instructions):
+        print(self.world)
+        print(self.instruction_set.world)
         if self.world is None:
             self.world = self.instruction_set.world
 
