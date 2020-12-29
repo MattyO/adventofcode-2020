@@ -36,6 +36,28 @@ class MaskTest(unittest.TestCase):
             expect_value
         )
 
+    def test_mask_ignore(self):
+        test_value   = "000000000000000000000000000000101010"
+        test_mask    = "000000000000000000000000000000X1001X"
+        expect_value = '000000000000000000000000000000X1101X'
+
+        self.assertEqual(
+            fourteen.main.mask(test_value, test_mask, ignore=['0']),
+            expect_value
+        )
+
+    def test_possible_addresses(self):
+        address = '000000000000000000000000000000X1101X' 
+        expected_addresses = [
+            '000000000000000000000000000000011010',
+            '000000000000000000000000000000011011',
+            '000000000000000000000000000000111010',
+            '000000000000000000000000000000111011',
+        ]
+        self.assertEqual(
+            sorted(fourteen.main.possible_addresses(address)),
+            sorted(expected_addresses)
+        )
 
 class ParseTest(unittest.TestCase):
 
@@ -92,16 +114,28 @@ class DockingInstructionSetTest(unittest.TestCase):
 class PartOneComputerTest(unittest.TestCase):
 
     def test_address_sum_example(self):
-        print('test exmaple')
         instructions = fourteen.main.parse("fourteen/example.txt")
         dc = fourteen.main.PartOneComputer()
         dc.run(instructions)
         self.assertEqual(fourteen.main.address_sum(dc), 165) 
 
     def test_address_sum_puzzle(self):
-        print('test puzzle')
         dc = fourteen.main.PartOneComputer()
         instructions = fourteen.main.parse("fourteen/puzzle.txt")
         dc.run(instructions)
         self.assertEqual(fourteen.main.address_sum(dc), 11884151942312)
+
+class PartTwoComputerTest(unittest.TestCase):
+
+    def test_address_sum_example(self):
+        instructions = fourteen.main.parse("fourteen/example2.txt")
+        dc = fourteen.main.PartTwoComputer()
+        dc.run(instructions)
+        self.assertEqual(fourteen.main.address_sum(dc), 208) 
+
+    def test_address_sum_puzzle(self):
+        dc = fourteen.main.PartTwoComputer()
+        instructions = fourteen.main.parse("fourteen/puzzle.txt")
+        dc.run(instructions)
+        self.assertEqual(fourteen.main.address_sum(dc), 2625449018811)
 

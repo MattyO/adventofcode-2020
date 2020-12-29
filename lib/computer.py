@@ -14,8 +14,6 @@ class Computer():
             self.world.update(world)
 
     def run(self, instructions):
-        print(self.world)
-        print(self.instruction_set.world)
         if self.world is None:
             self.world = self.instruction_set.world
 
