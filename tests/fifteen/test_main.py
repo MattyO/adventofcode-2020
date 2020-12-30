@@ -55,9 +55,9 @@ class GameLIstTest(unittest.TestCase):
             203 
         ) 
 
-    def test_item_at_example_2020(self):
+    def test_puzzle_part2(self):
         self.assertEqual(
             fifteen.main.item_at([0,5,4,1,10,14,7], 30000000),
-            203
+            9007186
         )
 
