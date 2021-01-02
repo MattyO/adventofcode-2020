@@ -52,6 +52,6 @@ class InvalidTest(unittest.TestCase):
 
     def test_puzzle(self):
         rules, ticket, nearby_tickets = sixteen.main.parse('sixteen/puzzle.txt')
-        self.assertEqual(sum(sixteen.main.invalid(rules, nearby_tickets)), 71)
+        self.assertEqual(sum(sixteen.main.invalid(rules, nearby_tickets)), 20231)
 
 
