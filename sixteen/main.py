@@ -36,6 +36,13 @@ class Ticket():
     def invalid_fields(self, rules):
         return [ f for f in self.fields if not any(rule.is_valid(f) for rule in rules)]
 
+    def field_labels(self, rules):
+        labels =  []
+        for field in self.fields:
+            labels.append([rule.name for rule in rules if rule.is_valid(field)])
+
+        return labels
+
 
 class Rule:
     def __init__(self, name, rule_ranges):
@@ -45,6 +52,31 @@ class Rule:
     def is_valid(self, i):
         return any( r.start <= i <= r.end for r in self.rule_ranges)
 
+    def __repr__(self):
+        ranges_str_list = [ f"range({r.start}, {r.end})" for r in self.rule_ranges]
+        return self.name + ": " + ", ".join(ranges_str_list)
+
 
 def invalid(rules, tickets):
     return functools.reduce(lambda memo, ticket: memo + ticket.invalid_fields(rules), tickets, [])
+
+def valid_tickets(rules, tickets):
+    return [ticket for ticket in tickets if len(ticket.invalid_fields(rules)) == 0]
+
+def possible_field_names(tickets, rules):
+    field_names = { i: set(r.name for r in rules) for i in range(len(tickets[0].fields))}
+    for tc, ticket in enumerate(tickets):
+        for i, possible_field_names in enumerate(ticket.field_labels(rules)):
+            field_names[i] &= set(possible_field_names) 
+
+    possible_names = [ list(field_names[i]) for i in sorted(field_names.keys()) ]
+
+    for i in range(len(possible_names)):
+        ensured_names = set([possibilities[0] for possibilities in possible_names if len(possibilities) == 1])
+        for i, possibilities in enumerate(possible_names):
+            if len(possibilities) > 1:
+                possible_names[i] = list(set(possibilities) - ensured_names)
+
+    return [single_possibility[0] for single_possibility in possible_names]
+
+
