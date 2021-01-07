@@ -27,6 +27,10 @@ class Grid():
     def neighbors(self, point):
         return [Point(point.x + x, point.y + y , point.z + z) for (x,y,z) in self.neighbour_offsets if not(x == y == z == 0)]
 
+    def active_neighboors(self, point):
+        return [neighbor  for neighbor in self.neighbors(point) if neighbor in self.points]
+
+
     def next_iteration_points(self):
         next_points = set()
 
@@ -37,9 +41,29 @@ class Grid():
 
     def cycle(self, count=1):
         count -= 1
+        points_to_remove = []
+        points_to_add  = []
+
+        print(self.points)
+
+        for possible_point in self.next_iteration_points():
+            if is_active(possible_point, self) and possible_point not in self.points:
+                points_to_add.append(possible_point)
+            elif possible_point in self.points:
+                points_to_remove.append(possible_point)
+
+#        print('removing')
+#        print(points_to_remove)
+#        print('adding')
+#        print(points_to_add)
+#
+        self.points = [ p for p in self.points if p not in points_to_remove ]
+        self.points += points_to_add
+
+        print(self.points)
 
         if count > 0:
-            self.interation(count)
+            self.cycle(count)
 
 
 class Point():
@@ -68,7 +92,8 @@ def parse(filename):
 
     for y, line in enumerate(lines):
         for x, c in enumerate(line.strip()):
-            points.append(Point(x,y,0))
+            if c == '#':
+                points.append(Point(x,y,0))
 
     return Grid(points)
 
